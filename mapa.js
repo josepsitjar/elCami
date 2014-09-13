@@ -2,10 +2,12 @@
 function init(){	
 	var map = new L.Map('map', {center: new L.LatLng(40.73061, 1.17554), zoom: 7});
 	map.options.maxZoom=15;
+	map.attributionControl.addAttribution("Maps dissenyat per <a href='http://josepsitjar.wordpress.com'>Josep Sitjar</a>");
 	var osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
-	/*s'ha de descomentar per a tenir la capa de google activa*/
+	
+	/*s'ha de descomentar per a tenir la capa de google activa
 	var ggl = new L.Google();
-	var ggl2 = new L.Google('TERRAIN');
+	var ggl2 = new L.Google('TERRAIN');*/
 	
 
 	
@@ -45,7 +47,7 @@ function init(){
         var div = L.DomUtil.create('div', 'info legend');
 
             div.innerHTML +=
-            '<i style="background:red"></i>' + 'Trams senyalitzats (troncal)'+'</br>'+
+            '<i style="background:#f50404"></i>' + 'Trams senyalitzats (troncal)'+'</br>'+
 	    '<i style="background:yellow"></i>' + 'Trams senyalitzats (brancals)'+'</br>'+
 	    '<i style="background:orange"></i>' + 'Trams definits sobre mapa o GPS (no senyalitzats)'+'</br>'+
 	    '<i style="background:green"></i>' + 'Trams en procés de definició'+'</br>'+	    
@@ -61,22 +63,22 @@ function init(){
 	var baseMaps = {	
 		
 		"OSM:":osm,
-		"Google":ggl,
-		"Google Terrain":ggl2,
+		//"Google":ggl,
+		//"Google Terrain":ggl2,
 		//"ICC":orto25,
 	};
 	L.control.layers(baseMaps).addTo(map);
 	
-	
-	
-	
+
+
+
 	
 	for(i=0;i<83;i++){
 		//var nomTram = camins[i][0];
 		//var nomCami = camins[i][1];
 		
 		var nomTram = new L.geoJson(camins[i][1],{
-			style:{"color": camins[i][2], "dashArray":camins[i][3]},
+			style:{"color": camins[i][2], "dashArray":camins[i][3]},"opacity":0.8,
 			onEachFeature:function(feature,layer){
 				layer.bindPopup(''+camins[i][4]);
 			
